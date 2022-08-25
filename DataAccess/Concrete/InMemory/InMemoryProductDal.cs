@@ -3,11 +3,13 @@ using Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace DataAccess.Concrete.InMemory
 {
+
     public class InMemoryProductDal : IProductDal
     {
         List<Product> _products;//global değişken
@@ -54,14 +56,7 @@ namespace DataAccess.Concrete.InMemory
             //Linq kullanılarak yapılma şekli
             productToDelete = _products.SingleOrDefault(p=>p.ProductId==product.ProductId);//SingleOrDefault tek bir eleman bulmaya yarar
             _products.Remove(productToDelete);
-        }  
-
-        public List<Product> GetAll()
-        {
-            return _products;
-        }
-
-       
+        }      
 
         public void Update(Product product)
         {
@@ -72,11 +67,16 @@ namespace DataAccess.Concrete.InMemory
             productToUpdate.UnitPrice = product.UnitPrice;
             productToUpdate.UnitsInStock = product.UnitsInStock;
   
+        }       
+
+        public List<Product> GetAll(Expression<Func<Product, bool>> filter = null)
+        {
+            return _products;
         }
 
-        public List<Product> GetAllByCategory(int CategoryId)
+        public Product Get(Expression<Func<Product, bool>> filter)
         {
-            return _products.Where(p => p.CategoryId == CategoryId).ToList();
+            throw new NotImplementedException();
         }
     }
 }
