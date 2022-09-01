@@ -21,5 +21,9 @@ namespace Business.Abstract
 
         IDataResult<Product> GetById(int productId);
 
+
+
+        //Restful yapılar Http protokolü üzerinden geliyor.
+        //Http Protokolü:Bir kaynağa ulaşmak için izlediğimiz yol
     }
 }
