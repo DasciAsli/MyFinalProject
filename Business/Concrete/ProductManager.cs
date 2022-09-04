@@ -1,10 +1,13 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using DataAccess.Concrete.InMemory;
 using Entities.Concrete;
 using Entities.DTOs;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,10 +33,19 @@ namespace Business.Concrete
             //Business codelar burada yazılır.
             //Antipattern : Kötü kullanım demek
             //Magic strings:Stringleri ayrı ayrı her yerde yazmak.
-            if (product.ProductName.Length<2)
-            {
-                return new ErrorResult(Messages.ProductNameInvalid);
-            }
+
+
+
+            //loglama
+            //cacheremove
+            //performance
+            //transaction
+            //authorization
+            //yukarıdaki işlemleri burada yapmak yerine [] (attributeler) ile bunları yapacağız
+
+
+            ValidationTool.Validate(new ProductValidator(), product);
+
             _productDal.Add(product);
             return new SuccessResult(Messages.ProductAdded);
         }
