@@ -1,6 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
@@ -28,6 +29,8 @@ namespace Business.Concrete
             _productDal = productDal;
         }
 
+
+        [ValidationAspect(typeof(ProductValidator))] //Add metodunu ProductValidatordeki kurallara göre doğrula
         public IResult Add(Product product)
         {
             //Business codelar burada yazılır.
@@ -43,8 +46,6 @@ namespace Business.Concrete
             //authorization
             //yukarıdaki işlemleri burada yapmak yerine [] (attributeler) ile bunları yapacağız
 
-
-            ValidationTool.Validate(new ProductValidator(), product);
 
             _productDal.Add(product);
             return new SuccessResult(Messages.ProductAdded);
