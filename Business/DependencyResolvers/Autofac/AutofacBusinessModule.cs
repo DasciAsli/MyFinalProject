@@ -18,10 +18,15 @@ namespace Business.DependencyResolvers.Autofac
     {
         protected override void Load(ContainerBuilder builder)//Uygulama yayınlandığında çalışır.
         {
+            //Autofac IoC
             builder.RegisterType<ProductManager>().As<IProductService>().SingleInstance();
             //Birisi IProductService isterse ona bir tane ProductManager instance'ı ver
             builder.RegisterType<EFProductDal>().As<IProductDal>().SingleInstance();
+            builder.RegisterType<CategoryManager>().As<ICategoryService>().SingleInstance();
+            //Birisi IProductService isterse ona bir tane ProductManager instance'ı ver
+            builder.RegisterType<EFCategoryDal>().As<ICategoryDal>().SingleInstance();
 
+            //Autofac Aspect
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
 
             builder.RegisterAssemblyTypes(assembly).AsImplementedInterfaces()
