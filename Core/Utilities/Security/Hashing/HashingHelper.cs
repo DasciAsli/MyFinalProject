@@ -17,7 +17,7 @@ namespace Core.Utilities.Security.Hashing
             using (var hmac = new System.Security.Cryptography.HMACSHA512())//hmac aslında cryptography sınıfında kullandığımız class'a karşılık geliyor
             {
                 passwordSalt = hmac.Key; // Her kullanıcı için başka bir key oluşturur
-                passwordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));//Bir stringin byte karşılığını Encoding.UTF8.GetBytes(password) ile alıyoruz
+                passwordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));//Bir stringin byte karşılığını Encoding.UTF8.GetBytes() ile alıyoruz
             }
 
         }
