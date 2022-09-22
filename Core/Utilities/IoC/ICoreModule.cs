@@ -11,4 +11,4 @@ namespace Core.Utilities.IoC
     {
         void Load(IServiceCollection serviceCollection);
     }
-}
+} 
