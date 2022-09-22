@@ -22,6 +22,8 @@ namespace Business.Abstract
 
         IDataResult<Product> GetById(int productId);
 
+        IResult AddTransactionalTest(Product product); //TransactionScopeAspecti denemek için oluşturuldu
+
 
 
         //Restful yapılar Http protokolü üzerinden geliyor.
