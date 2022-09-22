@@ -3,6 +3,7 @@ using Business.BusinessAspect.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Caching;
+using Core.Aspects.Autofac.Performance;
 using Core.Aspects.Autofac.Transaction;
 using Core.Aspects.Autofac.Validation;
 using Core.CrossCuttingConcerns.Validation;
@@ -74,6 +75,7 @@ namespace Business.Concrete
         }
 
         [CacheAspect]
+        /*[PerformanceAspect(5)]*/ // Bu metodun çalışma süresi 5 sn'yi geçerse beni uyar.Bu aspecti burada değil de intercetorlarımıza koyarsak eğer sistemdeki herşeyi takip eder.AspectInterceptorSelector'e eklemen gerekiyor.
         public IDataResult<List<Product>> GetAll()
         {
             if (DateTime.Now.Hour == 24)
