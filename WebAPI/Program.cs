@@ -27,7 +27,6 @@ internal class Program
 
 
         //API'ye jwt kullanilacagini bildiriliyor
-
         var tokenOptions = builder.Configuration.GetSection("TokenOptions").Get<TokenOptions>();
 
         builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -60,10 +59,10 @@ internal class Program
         //builder.Services.AddSingleton<IProductService,ProductManager>(); //Bana arka planda bir referans oluþtur.Yani IoC'ler bizim yerimize newliyor.Bellekte bir tane ProductManager oluþturuyor.Ne kadar client gelirse gelsin hepsine ayný ProductManager'ý veriyor.Ancak içerisinde data olmamalý
         //builder.Services.AddSingleton<IProductDal, EFProductDal>();
 
+        //CORS injectioný yapýldý Apide
+        builder.Services.AddCors();
 
 
-
-        //AOP'ye geçtikten sonra Businessda iþlemlerimizi yaptýk
         //Autofac için gerekli konfigürasyon
          builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory())
          .ConfigureContainer<ContainerBuilder>(builder =>
@@ -85,6 +84,7 @@ internal class Program
             app.UseSwagger();
             app.UseSwaggerUI();
         }
+        app.UseCors(builder=>builder.WithOrigins("http://localhost:5100").AllowAnyHeader());//Bunun yazýlma sýrasý önemli.Bu adresten gelen isteklere izin ver
 
         app.UseHttpsRedirection();
         app.UseRouting();

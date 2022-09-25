@@ -25,6 +25,7 @@ namespace WebAPI.Controllers
         [HttpGet("getall")]
         public IActionResult GetAll()
         {
+            Thread.Sleep(4000);//4 sn çalışmasını uzatıyorum
             //Dependency Chain
             var result = _productService.GetAll();
             if (result.Success)
