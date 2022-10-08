@@ -25,7 +25,7 @@ namespace WebAPI.Controllers
         [HttpGet("getall")]
         public IActionResult GetAll()
         {
-            Thread.Sleep(4000);//4 sn çalışmasını uzatıyorum
+            //Thread.Sleep(4000);//4 sn çalışmasını uzatıyorum
             //Dependency Chain
             var result = _productService.GetAll();
             if (result.Success)
@@ -42,6 +42,19 @@ namespace WebAPI.Controllers
         public IActionResult GetById(int id)
         {
             var result = _productService.GetById(id);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+
+            //Apini kullanan kişide kafa karışıklığı oluşturmamak için standart bir transaction kullanman daha iyi olur.
+        }
+
+        [HttpGet("getbycategory")]
+        public IActionResult GetByCategory(int categoryId)
+        {
+            var result = _productService.GetAllByCategoryId(categoryId);
             if (result.Success)
             {
                 return Ok(result);

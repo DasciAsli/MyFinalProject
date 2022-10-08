@@ -84,6 +84,8 @@ internal class Program
             app.UseSwagger();
             app.UseSwaggerUI();
         }
+        app.ConfigureCustomExceptionMiddleware();
+
         app.UseCors(builder=>builder.WithOrigins("http://localhost:5100").AllowAnyHeader());//Bunun yazýlma sýrasý önemli.Bu adresten gelen isteklere izin ver
 
         app.UseHttpsRedirection();
