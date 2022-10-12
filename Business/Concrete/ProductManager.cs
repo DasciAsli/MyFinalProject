@@ -39,7 +39,7 @@ namespace Business.Concrete
         }
 
 
-        //[SecuredOperation("product.add,admin")]
+        [SecuredOperation("product.add")]
         [ValidationAspect(typeof(ProductValidator))] //Add metodunu ProductValidatordeki kurallara göre doğrula
         [CacheRemoveAspect("IProductService.Get")]//IProductServicede içinde Get geçen tüm cacheleri siler.Data değiştiği için
         public IResult Add(Product product)
